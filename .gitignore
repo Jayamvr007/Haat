@@ -1,0 +1,41 @@
+# Xcode
+#
+# gitignore contributors: better projects by 20%
+
+### Xcode ###
+# Build artifacts
+build/
+DerivedData/
+
+# User Settings
+*.xcuserdatad
+*.xccheckout
+*.xcscheme
+*.xcuserstate
+*.xcworkspace/xcuserdata
+*.xcworkspace/xcshareddata/xcschemes
+
+# External dependencies
+# Carthage
+Carthage/Build/
+
+# CocoaPods
+# We are currently not using CocoaPods, but keeping it for completeness if added.
+# Pods/
+# *.xcworkspace
+
+# Swift Package Manager
+# .build/
+
+# Apple Desktop
+.DS_Store
+
+# Temporary files
+*.swp
+*.lock
+*.log
+
+# Staging JSON (Optional: Keep if you want reviewers to see local testing data)
+# venue_menu.json
+# venue_info.json
+# venue_delivery.json
