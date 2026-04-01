@@ -195,6 +195,12 @@ struct VenueScreen: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, cartManager.totalItems > 0 ? 0 : 24)
                 
+                // Free Delivery Tracker
+                if cartManager.totalItems > 0 {
+                    freeDeliveryTracker
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+                
                 // Cart Banner
                 if cartManager.totalItems > 0 {
                     cartBanner
@@ -484,7 +490,8 @@ struct VenueScreen: View {
             Spacer()
             
             // Format price dynamically, remove decimals if flat
-            Text("₪\(calculateTotal(), specifier: calculateTotal().truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
+            let total = viewModel.calculateTotal(for: cartManager.cartItems)
+            Text("₪\(total, specifier: total.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(textColor)
         }
@@ -493,14 +500,59 @@ struct VenueScreen: View {
         .background(bgColor)
     }
     
-    private func calculateTotal() -> Double {
-        var total: Double = 0
-        let items = viewModel.menuResponse?.sections?.flatMap { $0.items ?? [] } ?? []
-        for (id, qty) in cartManager.cartItems {
-            if let item = items.first(where: { $0.id == id }) {
-                total += item.currentPrice * Double(qty)
+    private var freeDeliveryTracker: some View {
+        let subtotal = viewModel.calculateTotal(for: cartManager.cartItems)
+        let remaining = max(0, viewModel.freeDeliveryThreshold - subtotal)
+        let progress = min(1.0, subtotal / viewModel.freeDeliveryThreshold)
+        
+        VStack(spacing: 8) {
+            HStack {
+                if remaining > 0 {
+                    Group {
+                        Text("Add ") +
+                        Text("₪\(String(format: "%.1f", remaining))").bold() +
+                        Text(" more for ") +
+                        Text("Free Delivery!").bold()
+                    }
+                    .font(.system(size: 13))
+                    .foregroundColor(.haatTextDark)
+                } else {
+                    HStack(spacing: 4) {
+                        Image(systemName: "checkmark.seal.fill")
+                            .foregroundColor(.haatGreen)
+                        Text("🎉 Free Delivery Unlocked!")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.haatGreen)
+                    }
+                }
+                
+                Spacer()
+                
+                Text("₪\(String(format: "%.1f", subtotal))")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.haatTextDark)
             }
+            
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(Color.gray.opacity(0.1))
+                        .frame(height: 6)
+                    
+                    Capsule()
+                        .fill(remaining > 0 ? Color.haatRed.opacity(0.6) : Color.haatGreen)
+                        .frame(width: geo.size.width * progress, height: 6)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: progress)
+                }
+            }
+            .frame(height: 6)
         }
-        return total
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
     }
 }

@@ -15,8 +15,9 @@ My implementation of the Haat Delivery Venue Screen, built natively in SwiftUI a
     - **Sticky Header:** The search bar and venue logo transition smoothly based on the scroll position.
     - **Interactive Feedback:** Integrated haptics and spring animations for a more tactile user experience.
 
-## 🚀 Added Feature: Product Detail View
-To improve the user experience, I added a **Product Detail Bottom Sheet**. This allows users to see full descriptions and larger images comfortably without losing their place in the main list. It stays perfectly in sync with the cart state.
+## 🚀 Added Features
+- **Product Detail Bottom Sheet**: Allows users to see full descriptions and larger images comfortably without losing their place in the main list. It stays perfectly in sync with the cart state.
+- **Free Delivery Progress Tracker**: A dynamic visual indicator in the cart area that shows how much more a user needs to spend to unlock free delivery (₪80 threshold), improving conversion and UX.
 
 ## 📸 Screenshots
 

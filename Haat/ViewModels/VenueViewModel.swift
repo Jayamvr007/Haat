@@ -15,6 +15,9 @@ class VenueViewModel: ObservableObject {
     private let deliveryURL = "https://user-new-app-staging.internal.haat.delivery/api/venue/5230/delivery-details?isByLocation=true&userLatitude=32.53176498413086&userLongitude=35.149749755859375"
     private let menuURL = "https://user-new-app-staging.internal.haat.delivery/api/venue/5230/menu"
     
+    let freeDeliveryThreshold: Double = 80.0
+
+    
     func loadData() async {
         guard !isLoading else { return }
         isLoading = true
@@ -61,5 +64,21 @@ class VenueViewModel: ObservableObject {
             }
             return nil
         }
+    }
+    
+    // Helper to calculate total price based on cart items
+    func calculateTotal(for cartItems: [Int: Int]) -> Double {
+        guard let sections = menuResponse?.sections else { return 0.0 }
+        
+        var total = 0.0
+        let allProducts = sections.flatMap { $0.items ?? [] }
+        
+        for (productId, quantity) in cartItems {
+            if let product = allProducts.first(where: { $0.id == productId }) {
+                total += product.currentPrice * Double(quantity)
+            }
+        }
+        
+        return total
     }
 }
