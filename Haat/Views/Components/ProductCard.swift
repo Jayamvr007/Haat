@@ -117,7 +117,7 @@ struct ProductCard: View {
             Spacer()
             
             // Add to Cart / Stepper
-            // Navigation logic
+            // Cart actions
             cartActionView
             .padding(.bottom, 10)
         }
@@ -194,7 +194,7 @@ struct ProductCard: View {
         }
     }
     
-    // MARK: - Actions
+    // Actions
     
     private func handleSub() {
         withAnimation(.easeInOut(duration: 0.2)) {

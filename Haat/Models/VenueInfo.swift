@@ -78,7 +78,7 @@ struct NoticeMessage: Codable {
     let message: String?
 }
 
-// MARK: - Extended Venue Structures
+// Extended Venue Structures
 struct VenueWorkingHours: Codable {
     let isOpened24Hours: Bool?
     let isClosed24Hours: Bool?

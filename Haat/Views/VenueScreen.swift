@@ -157,7 +157,7 @@ struct VenueScreen: View {
                 await viewModel.loadData()
             }
             
-            // MARK: - Bottom Floating Elements
+            // Bottom Floating Elements
             VStack(spacing: 16) {
                 // Floating Action Buttons
                 HStack(spacing: 0) {
@@ -315,7 +315,7 @@ struct VenueScreen: View {
     }
     }
     
-    // MARK: - Shimmer Loading
+    // Shimmer Loading
     private var loadingView: some View {
         VStack(spacing: 20) {
             // Venue card shimmer
@@ -354,7 +354,7 @@ struct VenueScreen: View {
         }
     }
     
-    // MARK: - Error View
+    // Error View
     private func errorView(error: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
@@ -382,7 +382,7 @@ struct VenueScreen: View {
         .padding(.top, 60)
     }
     
-    // MARK: - Footer
+    // Footer
     private var footerButton: some View {
         Button(action: {}) {
             HStack {
@@ -400,7 +400,7 @@ struct VenueScreen: View {
         .padding(.vertical, 24)
     }
     
-    // MARK: - Cart Banner
+    // Cart Banner
     private var cartBanner: some View {
         Button(action: {
             // Action to view order
