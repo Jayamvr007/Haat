@@ -31,6 +31,7 @@ struct VenueScreen: View {
                 Color.haatBackground.edgesIgnoringSafeArea(.all)
             
             ScrollViewReader { scrollProxy in
+            ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
                     
@@ -210,6 +211,7 @@ struct VenueScreen: View {
                         ))
                         .animation(.spring(response: 0.4, dampingFraction: 0.75), value: cartManager.totalItems)
                 }
+            }
             }
             } // end ScrollViewReader
             
