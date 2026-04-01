@@ -145,19 +145,19 @@ struct ProductCard: View {
                     Button(action: handleSub) {
                         Text("—")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.haatTextDark)
+                            .foregroundColor(.haatRed)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     
                     Text("\(quantity)")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.haatRed)
+                        .foregroundColor(.haatTextDark)
                         .fixedSize()
                     
                     Button(action: handleAddSecondary) {
                         Text("+")
                             .font(.system(size: 18, weight: .medium))
-                            .foregroundColor(.haatTextDark)
+                            .foregroundColor(.haatRed)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }

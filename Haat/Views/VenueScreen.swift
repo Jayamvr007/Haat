@@ -30,6 +30,7 @@ struct VenueScreen: View {
             ZStack(alignment: .bottom) {
                 Color.haatBackground.edgesIgnoringSafeArea(.all)
             
+            ScrollViewReader { scrollProxy in
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
                     
@@ -63,6 +64,7 @@ struct VenueScreen: View {
                         }
                         .frame(height: 220)
                     }
+                    .id("scrollTop")
                     
                     // Navigation logic
                     if viewModel.isLoading && viewModel.venueInfo == nil {
@@ -162,7 +164,9 @@ struct VenueScreen: View {
                 // Floating Action Buttons
                 HStack(spacing: 0) {
                     Button(action: {
-                        // Action for scroll to top
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            scrollProxy.scrollTo("scrollTop", anchor: .top)
+                        }
                     }) {
                         Image(systemName: "arrow.up")
                             .font(.system(size: 18, weight: .semibold))
@@ -179,7 +183,7 @@ struct VenueScreen: View {
                     Button(action: {
                         // Action for support
                     }) {
-                        Image(systemName: "headphones")
+                        Image("haat_call")
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.white)
                             .frame(width: 44, height: 44)
@@ -201,6 +205,7 @@ struct VenueScreen: View {
                         .animation(.spring(response: 0.4, dampingFraction: 0.75), value: cartManager.totalItems)
                 }
             }
+            } // end ScrollViewReader
             
             // Sticky Navigation Bar
             if !showSearchOverlay {
