@@ -23,7 +23,7 @@ My implementation of the Haat Delivery Venue Screen, built natively in SwiftUI a
 
 | Venue Screen | Product List | Product Detail |
 |:---:|:---:|:---:|
-| ![Venue Screen](./screenshots/IMG_2973.PNG) | ![Product List](./screenshots/IMG_2974.PNG) | ![Product Detail](./screenshots/ProductDetail.png) |
+| ![Venue Screen](./Screenshots/IMG_2973.PNG) | ![Product List](./Screenshots/IMG_2974.PNG) | ![Product Detail](./Screenshots/ProductDetail.png) |
 
 
 ## 🛠️ How to Run
