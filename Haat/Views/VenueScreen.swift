@@ -500,59 +500,62 @@ struct VenueScreen: View {
         .background(bgColor)
     }
     
+    @ViewBuilder
     private var freeDeliveryTracker: some View {
         let subtotal = viewModel.calculateTotal(for: cartManager.cartItems)
         let remaining = max(0, viewModel.freeDeliveryThreshold - subtotal)
         let progress = min(1.0, subtotal / viewModel.freeDeliveryThreshold)
         
-        VStack(spacing: 8) {
-            HStack {
-                if remaining > 0 {
-                    Group {
-                        Text("Add ") +
-                        Text("₪\(String(format: "%.1f", remaining))").bold() +
-                        Text(" more for ") +
-                        Text("Free Delivery!").bold()
+        Group {
+            VStack(spacing: 8) {
+                HStack {
+                    if remaining > 0 {
+                        Group {
+                            Text("Add ") +
+                            Text("₪\(String(format: "%.1f", remaining))").bold() +
+                            Text(" more for ") +
+                            Text("Free Delivery!").bold()
+                        }
+                        .font(.system(size: 13))
+                        .foregroundColor(.haatTextDark)
+                    } else {
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark.seal.fill")
+                                .foregroundColor(.haatGreen)
+                            Text("🎉 Free Delivery Unlocked!")
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundColor(.haatGreen)
+                        }
                     }
-                    .font(.system(size: 13))
-                    .foregroundColor(.haatTextDark)
-                } else {
-                    HStack(spacing: 4) {
-                        Image(systemName: "checkmark.seal.fill")
-                            .foregroundColor(.haatGreen)
-                        Text("🎉 Free Delivery Unlocked!")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(.haatGreen)
-                    }
-                }
-                
-                Spacer()
-                
-                Text("₪\(String(format: "%.1f", subtotal))")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.haatTextDark)
-            }
-            
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(Color.gray.opacity(0.1))
-                        .frame(height: 6)
                     
-                    Capsule()
-                        .fill(remaining > 0 ? Color.haatRed.opacity(0.6) : Color.haatGreen)
-                        .frame(width: geo.size.width * progress, height: 6)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: progress)
+                    Spacer()
+                    
+                    Text("₪\(String(format: "%.1f", subtotal))")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.haatTextDark)
                 }
+                
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(Color.gray.opacity(0.1))
+                            .frame(height: 6)
+                        
+                        Capsule()
+                            .fill(remaining > 0 ? Color.haatRed.opacity(0.6) : Color.haatGreen)
+                            .frame(width: geo.size.width * progress, height: 6)
+                            .animation(.spring(response: 0.5, dampingFraction: 0.8), value: progress)
+                    }
+                }
+                .frame(height: 6)
             }
-            .frame(height: 6)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
-        .padding(.horizontal, 16)
-        .padding(.bottom, 8)
     }
 }
