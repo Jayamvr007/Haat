@@ -21,10 +21,9 @@ My implementation of the Haat Delivery Venue Screen, built natively in SwiftUI a
 
 ## 📸 Screenshots
 
-| Page | Feature |
-|:---:|:---:|
-| ![Venue Screen](./Screenshots/IMG_2973.PNG) | ![Product List](./Screenshots/IMG_2974.PNG) |
-| ![Product Detail](./Screenshots/IMG_2975.PNG) | ![Cart Animation](./Screenshots/IMG_2976.PNG) |
+| Venue Screen | Product List | Product Detail |
+|:---:|:---:|:---:|
+| ![Venue Screen](./screenshots/IMG_2973.PNG) | ![Product List](./screenshots/IMG_2974.PNG) | ![Product Detail](./screenshots/ProductDetail.png) |
 
 
 ## 🛠️ How to Run

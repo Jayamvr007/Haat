@@ -28,7 +28,6 @@ struct ImageInfo: Codable {
     }
 }
 
-// Venue Info
 struct VenueInfo: Codable, Identifiable {
     let id: Int?
     let type: String?
@@ -40,7 +39,6 @@ struct VenueInfo: Codable, Identifiable {
     let banner: VenueBanner?
     let noticeMessage: NoticeMessage?
     
-    // Newly mapped API fields
     let phoneNumbers: [String]?
     let workingHours: VenueWorkingHours?
     let franchiseBranches: FranchiseBranches?

@@ -11,7 +11,6 @@ struct ProductDetailSheet: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Drag Handle
             RoundedRectangle(cornerRadius: 3)
                 .fill(Color.gray.opacity(0.4))
                 .frame(width: 40, height: 5)
@@ -21,7 +20,6 @@ struct ProductDetailSheet: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {
                     
-                    // Large Product Image
                     if let imageUrl = product.productImages?.first?.fullUrl {
                         CachedAsyncImage(url: imageUrl) { image in
                             image.resizable()
@@ -36,7 +34,6 @@ struct ProductDetailSheet: View {
                         .padding(.horizontal, 16)
                     }
                     
-                    // Badges
                     HStack(spacing: 8) {
                         if product.notAvailable == true {
                             badgePill(text: "Unavailable", color: .gray)
@@ -51,7 +48,6 @@ struct ProductDetailSheet: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    // Product Name
                     Text(product.name?.localized ?? "Product")
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(.haatTextDark)
@@ -104,12 +100,10 @@ struct ProductDetailSheet: View {
                 .padding(.bottom, 16)
             }
             
-            // Bottom Add to Cart area
             VStack(spacing: 0) {
                 Divider()
                 
                 if quantity > 0 {
-                    // Stepper
                     HStack(spacing: 0) {
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.2)) {
@@ -148,7 +142,6 @@ struct ProductDetailSheet: View {
                     .padding(.horizontal, 32)
                     .padding(.vertical, 16)
                 } else {
-                    // Large Add button
                     Button(action: {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                             cartManager.addItem(productId: product.id ?? 0)

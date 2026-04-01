@@ -37,7 +37,7 @@ extension View {
     }
 }
 
-// A generic rectangular placeholder that shimmers
+
 struct ShimmerPlaceholder: View {
     var width: CGFloat? = nil
     var height: CGFloat? = nil

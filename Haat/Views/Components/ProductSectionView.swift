@@ -6,7 +6,6 @@ struct ProductSectionView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // Section Header
             HStack {
                 Text(title)
                     .font(.system(size: 18, weight: .bold))
@@ -25,14 +24,12 @@ struct ProductSectionView: View {
             }
             .padding(.horizontal, 16)
             
-            // Horizontal Product Cards
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(items) { item in
                         ProductCard(product: item)
                     }
                     
-                    // "View All" card at end of carousel (per Figma annotation)
                     viewAllCard
                 }
                 .padding(.horizontal, 16)

@@ -66,7 +66,7 @@ class VenueViewModel: ObservableObject {
         }
     }
     
-    // Helper to calculate total price based on cart items
+    // Total price calculation
     func calculateTotal(for cartItems: [Int: Int]) -> Double {
         guard let sections = menuResponse?.sections else { return 0.0 }
         

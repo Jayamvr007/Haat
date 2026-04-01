@@ -10,9 +10,9 @@ struct FlyingCartItemView: View {
     
     private var effectiveTarget: CGRect {
         if targetRect == .zero {
-            // Fallback: Left side of screen where the circle badge appears
+            
             let screen = UIScreen.main.bounds
-            // 16 padding + 12 half-width = 28
+            
             return CGRect(x: 28, y: screen.height - 80, width: 24, height: 24)
         }
         return targetRect
@@ -24,7 +24,7 @@ struct FlyingCartItemView: View {
                 image.resizable()
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
-                Circle().fill(Color.gray.opacity(0.3)) // Fallback shape
+                Circle().fill(Color.gray.opacity(0.3)) 
             }
         }
         .frame(width: animate ? effectiveTarget.width : item.startRect.width,
@@ -34,17 +34,17 @@ struct FlyingCartItemView: View {
         .position(x: animate ? effectiveTarget.midX : item.startRect.midX,
                   y: animate ? effectiveTarget.midY : item.startRect.midY)
         .onAppear {
-            // Trigger the fly animation with a production-grade response
+            
             withAnimation(.spring(response: 0.45, dampingFraction: 0.75)) {
                 animate = true
             }
             
-            // Fade out right before it fully hits the target
+            
             withAnimation(.linear(duration: 0.1).delay(0.45)) {
                 opacity = 0.0
             }
             
-            // Remove from state when complete
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 onComplete()
             }

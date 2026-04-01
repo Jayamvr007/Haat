@@ -32,7 +32,7 @@ class CartManager: ObservableObject {
         return cartItems.values.reduce(0, +)
     }
     
-    // Animation Coordination
+    
     func addFlyingItem(imageUrl: String, startRect: CGRect) {
         let item = FlyingItem(imageUrl: imageUrl, startRect: startRect)
         flyingItems.append(item)

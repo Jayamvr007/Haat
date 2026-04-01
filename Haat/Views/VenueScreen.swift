@@ -26,7 +26,6 @@ struct VenueScreen: View {
     
     var body: some View {
         ZStack {
-            // Main App Content Layer
             ZStack(alignment: .bottom) {
                 Color.haatBackground.edgesIgnoringSafeArea(.all)
             
@@ -67,7 +66,6 @@ struct VenueScreen: View {
                     }
                     .id("scrollTop")
                     
-                    // Navigation logic
                     if viewModel.isLoading && viewModel.venueInfo == nil {
                         loadingView
                             .offset(y: -30)
@@ -135,9 +133,9 @@ struct VenueScreen: View {
                                     }
                                 }
                                 .id(sectionKey)
-                            } // end ForEach
+                            }
                             
-                            Spacer(minLength: 100)
+                            Spacer(minLength: 140)
                         }
                     }
                 }
@@ -196,24 +194,18 @@ struct VenueScreen: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, cartManager.totalItems > 0 ? 0 : 24)
                 
-                // Free Delivery Tracker
+                // Free Delivery Tracker & Cart Banner
                 if cartManager.totalItems > 0 {
-                    freeDeliveryTracker
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-                
-                // Cart Banner
-                if cartManager.totalItems > 0 {
-                    cartBanner
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .leading).combined(with: .opacity),
-                            removal: .move(edge: .trailing).combined(with: .opacity)
-                        ))
-                        .animation(.spring(response: 0.4, dampingFraction: 0.75), value: cartManager.totalItems)
+                    VStack(spacing: 8) {
+                        freeDeliveryTracker
+                        cartBanner
+                    }
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .animation(.spring(response: 0.4, dampingFraction: 0.75), value: cartManager.totalItems)
                 }
             }
             }
-            } // end ScrollViewReader
+            }
             
             // Sticky Navigation Bar
             if !showSearchOverlay {
@@ -307,25 +299,25 @@ struct VenueScreen: View {
                 .transition(.move(edge: .trailing))
                 .zIndex(4)
             }
-        }
-        .onPreferenceChange(CartIconRectKey.self) { rect in
-            cartIconRect = rect
-        }
-        
-        // FLYING ANIMATION LAYER (Top-most Z-Index)
-        ForEach(cartManager.flyingItems) { item in
-            FlyingCartItemView(item: item, targetRect: cartIconRect) {
-                cartManager.removeFlyingItem(item)
+            }
+            .onPreferenceChange(CartIconRectKey.self) { rect in
+                cartIconRect = rect
+            }
+            
+            // FLYING ANIMATION LAYER
+            ForEach(cartManager.flyingItems) { item in
+                FlyingCartItemView(item: item, targetRect: cartIconRect) {
+                    cartManager.removeFlyingItem(item)
+                }
             }
         }
-    }
-    .environmentObject(cartManager)
-    .edgesIgnoringSafeArea(.top)
-    .onAppear {
-        Task {
-            await viewModel.loadData()
+        .environmentObject(cartManager)
+        .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            Task {
+                await viewModel.loadData()
+            }
         }
-    }
     }
     
     // Shimmer Loading
@@ -416,10 +408,9 @@ struct VenueScreen: View {
     // Cart Banner
     private var cartBanner: some View {
         Button(action: {
-            // Action to view order
+            // View order action
         }) {
             GeometryReader { geo in
-                // Sweeping Red Layer (Masked)
                 cartBannerContent(
                     bgColor: .haatRed,
                     textColor: .white,
@@ -491,7 +482,7 @@ struct VenueScreen: View {
             
             Spacer()
             
-            // Format price dynamically, remove decimals if flat
+            // Total price
             let total = viewModel.calculateTotal(for: cartManager.cartItems)
             Text("₪\(total, specifier: total.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f")")
                 .font(.system(size: 16, weight: .bold))
@@ -557,7 +548,6 @@ struct VenueScreen: View {
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
             .padding(.horizontal, 16)
-            .padding(.bottom, 8)
         }
     }
 }

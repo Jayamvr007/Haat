@@ -33,7 +33,6 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        // Staging API may require some default headers or just standard ones
         
         let (data, response) = try await session.data(for: request)
         

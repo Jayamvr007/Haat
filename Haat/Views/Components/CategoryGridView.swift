@@ -36,7 +36,6 @@ struct CategoryCard: View {
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            // Category Image
             if let imageUrl = category.image?.fullUrl {
                 CachedAsyncImage(url: imageUrl) { image in
                     image.resizable()
@@ -53,9 +52,7 @@ struct CategoryCard: View {
                     .frame(height: 136)
             }
             
-            // Overlay text with gradient background
             HStack {
-                // Name
                 Text(category.name ?? "")
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.haatTextDark)

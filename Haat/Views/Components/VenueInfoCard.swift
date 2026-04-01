@@ -8,7 +8,6 @@ struct VenueInfoCard: View {
         VStack(alignment: .leading, spacing: 4) {
             // Top Section
             VStack(alignment: .leading, spacing: 10) {
-                // Row 1: Logo + Heart
                 HStack(alignment: .top) {
                     // Logo
                     if let iconUrl = venue?.iconImage?.fullUrl {
@@ -36,7 +35,6 @@ struct VenueInfoCard: View {
                     }
                 }
                 
-                // Row 2: Title + Chevron
                 HStack(alignment: .center) {
                     Text(venue?.name?.localized ?? "")
                         .font(.system(size: 28, weight: .heavy))
@@ -50,12 +48,10 @@ struct VenueInfoCard: View {
                 }
                 .padding(.top, 4)
                 
-                // Row 3: Address
                 Text(venue?.location?.address ?? "")
                     .font(.system(size: 16))
                     .foregroundColor(.haatTextLight)
                 
-                // Row 4: Open Status
                 HStack(spacing: 4) {
                     Text("Open")
                         .font(.system(size: 16, weight: .bold))
@@ -173,9 +169,7 @@ struct VenueInfoCard: View {
             .padding(.vertical, 24)
             .padding(.horizontal, 16)
             
-            // Promo Banners
             VStack(spacing: 8) {
-                // Sale Banner
                 HStack(spacing: 12) {
                     Image("sale")
                         .font(.system(size: 24, weight: .bold))
@@ -195,7 +189,6 @@ struct VenueInfoCard: View {
                 .background(Color.haatSearchBg)
                 .cornerRadius(12)
                 
-                // Delivery Banner
                 HStack(spacing: 12) {
                     Image("scooter2")
                         .resizable()

@@ -14,7 +14,6 @@ struct ProductCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Product Image
             ZStack(alignment: .bottomLeading) {
                 if let imageUrl = product.productImages?.first?.fullUrl {
                     CachedAsyncImage(url: imageUrl) { image in
@@ -32,7 +31,6 @@ struct ProductCard: View {
                         .padding(8)
                 }
                 
-                // Top Badges
                 VStack(alignment: .leading, spacing: 4) {
                     if product.notAvailable == true {
                         Text("Unavailable")
@@ -79,7 +77,6 @@ struct ProductCard: View {
             }
             
             VStack(alignment: .leading, spacing: 4) {
-                // Price Row
                 HStack(alignment: .bottom, spacing: 4) {
                     Text("₪\(String(format: "%.1f", product.currentPrice))")
                         .font(.system(size: 16, weight: .bold))
@@ -93,7 +90,6 @@ struct ProductCard: View {
                     }
                 }
                 
-                // Name
                 Text(product.name?.localized ?? "")
                     .font(.system(size: 13))
                     .foregroundColor(product.notAvailable == true ? .haatTextLight : .haatTextDark)
@@ -116,8 +112,6 @@ struct ProductCard: View {
             
             Spacer()
             
-            // Add to Cart / Stepper
-            // Cart actions
             cartActionView
             .padding(.bottom, 10)
         }
@@ -136,11 +130,9 @@ struct ProductCard: View {
         }
     }
     
-    @ViewBuilder
     private var cartActionView: some View {
         Group {
             if quantity > 0 {
-                // Stepper
                 HStack(spacing: 0) {
                     Button(action: handleSub) {
                         Text("—")
@@ -171,7 +163,6 @@ struct ProductCard: View {
                 .padding(.horizontal, 10)
                 .transition(.scale.combined(with: .opacity))
             } else {
-                // Single + button
                 Button(action: handleAddInitial) {
                     Text("+")
                         .font(.system(size: 22, weight: .medium))
@@ -193,8 +184,6 @@ struct ProductCard: View {
             }
         }
     }
-    
-    // Actions
     
     private func handleSub() {
         withAnimation(.easeInOut(duration: 0.2)) {
