@@ -35,7 +35,10 @@ struct Product: Codable, Identifiable {
     }
     
     var hasDiscount: Bool {
-        return discountPrice != nil && discountPrice! < (basePrice ?? 0.0)
+        if let discount = discountPrice, let base = basePrice {
+            return discount < base
+        }
+        return false
     }
 }
 
